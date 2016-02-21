@@ -1,0 +1,33 @@
+{
+    "name": "chrisyue/auto-json-response-bundle",
+    "description": "A Symfony bundle with a listener which converts controller returned data to a appropriate JsonResponse.",
+    "homepage": "http://chrisyue.com",
+    "type": "symfony-bundle",
+    "authors": [{
+        "name": "chrisyue",
+        "email": "blizzchris@gmail.com",
+        "homepage": "http://chrisyue.com"
+    }],
+    "keywords": [
+        "json",
+        "response"
+    ],
+    "license": [
+        "MIT"
+    ],
+    "require": {
+        "php": ">=5.3.9",
+        "symfony/symfony": ">=2.3"
+    },
+    "autoload": {
+        "psr-0": {
+            "Chrisyue\\Bundle\\AutoJsonResponseBundle" : ""
+        }
+    },
+    "target-dir": "Chrisyue/Bundle/AutoJsonResponseBundle",
+    "extra": {
+        "branch-alias" : {
+            "dev-master" : "1.0-dev"
+        }
+    }
+}

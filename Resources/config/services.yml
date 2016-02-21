@@ -1,0 +1,10 @@
+parameters:
+    chrisyue_auto_json_response.listener.auto_json_response.class: Chrisyue\Bundle\AutoJsonResponseBundle\EventListener\AutoJsonResponseListener
+
+services:
+    chrisyue_auto_json_response.listener.auto_json_response:
+        class: %chrisyue_auto_json_response.listener.auto_json_response.class%
+        tags:
+            -
+                name: kernel.event_listener
+                event: kernel.view
