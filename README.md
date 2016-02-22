@@ -4,7 +4,7 @@ A Symfony listener which converts controller returned data to a appropriate Json
 ## Feature
 * Convert `null` (or no `return`) to `Response(null, 204)`
 * Convert `$array` to `JsonResponse($array)`
-* Convert `$array` to `JsonResponse($array, 201) if the method is post`
+* Convert `$array` to `JsonResponse($array, 201)` if the method is post
 
 ## Installation
 ```
@@ -25,3 +25,20 @@ public function registerBundles()
 
 ## Usage
 After installation, this bundle will take effect if the route `_format` parameter is set to `json`.
+
+```
+# in your route file:
+api:
+    resource: ...
+    defaults:
+        _format: json
+
+// or in your controller file when you use annotation
+/**
+ * @Route(...)
+ */
+public function putAction(Response $response, $_format = 'json')
+{
+    ...
+}
+```
