@@ -1,14 +1,31 @@
-# auto-json-response
+Auto Json Response Bundle
+=========================
+
+v1.0.0
+
 A Symfony listener which converts controller returned data to a appropriate JsonResponse.
 
-## Feature
-* Convert `null` (or no `return`) to `Response(null, 204)`
-* Convert `$array` to `JsonResponse($array)`
-* Convert `$array` to `JsonResponse($array, 201)` if the method is post
+[![SensioLabsInsight](https://insight.sensiolabs.com/projects/2a0c6077-2542-41f9-ac29-c84ef7239771/big.png)](https://insight.sensiolabs.com/projects/2a0c6077-2542-41f9-ac29-c84ef7239771)
 
-## Installation
+[![Latest Stable Version](https://poser.pugx.org/chrisyue/auto-json-response-bundle/v/stable)](https://packagist.org/packages/chrisyue/auto-json-response-bundle)
+[![License](https://poser.pugx.org/chrisyue/auto-json-response-bundle/license)](https://packagist.org/packages/chrisyue/auto-json-response-bundle)
+[![Build Status](https://travis-ci.org/chrisyue/auto-json-response-bundle.svg?branch=develop)](https://travis-ci.org/chrisyue/auto-json-response-bundle)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/chrisyue/auto-json-response-bundle/badges/quality-score.png?b=develop)](https://scrutinizer-ci.com/g/chrisyue/auto-json-response-bundle/?branch=develop)
+[![Code Coverage](https://scrutinizer-ci.com/g/chrisyue/auto-json-response-bundle/badges/coverage.png?b=develop)](https://scrutinizer-ci.com/g/chrisyue/auto-json-response-bundle/?branch=develop)
+[![StyleCI](https://styleci.io/repos/52212031/shield)](https://styleci.io/repos/52212031)
+
+Features
+--------
+
+* Convert `null` (or no `return`) to `JsonResponse(null, 204)`
+* Convert `$array|$object` to `JsonResponse($array|$normalizedObject)`
+* Convert `$array|$object` to `JsonResponse($array|$normalizedObject, 201)` if the method is `POST`
+
+Installation
+------------
+
 ```
-$ composer require 'chrisyue/auto-json-response:dev-master'
+$ composer require chrisyue/auto-json-response-bundle
 ```
 
 ```php
@@ -23,17 +40,22 @@ public function registerBundles()
 }
 ```
 
-## Usage
-After installation, this bundle will take effect if the route `_format` parameter is set to `json`.
+Usage
+-----
 
-```
+This bundle will take effect if the route `_format` parameter is set to `json`.
+
+```yaml
 # in your route file:
 api:
     resource: ...
     defaults:
         _format: json
+```
 
-// or in your controller file when you use annotation
+or in your controller file when you use annotation
+
+```php
 /**
  * @Route(...)
  */
@@ -42,3 +64,32 @@ public function putAction(Response $response, $_format = 'json')
     ...
 }
 ```
+
+or any other ways to set the `$_format` to `json`.
+
+This bundle uses Symfony built-in serializer to normalize object, so the serialize feature should be enable if you want to deal with object:
+
+```yaml
+# app/config/config.yml
+framework:
+    # ...
+    serializer:
+        enabled: true
+```
+
+with the power of the built-in serializer, we can do more configuration to meet our needs, like convert camalCase property to snake\_case:
+
+```yaml
+# app/config/services.yml
+services:
+    app.serializer.snake_case_converter:
+        class: Symfony\Component\Serializer\NameConverter\CamelCaseToSnakeCaseNameConverter
+
+# app/config/config.yml
+framework:
+    serializer:
+        enable_annotations: true
+        name_converter: app.serializer.snake_case_converter
+```
+
+More information about serialize, just check [symfony official documentation](https://symfony.com/doc/current/cookbook/serializer.html)

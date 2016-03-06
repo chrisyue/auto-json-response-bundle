@@ -4,6 +4,8 @@ parameters:
 services:
     chrisyue_auto_json_response.listener.auto_json_response:
         class: %chrisyue_auto_json_response.listener.auto_json_response.class%
+        arguments:
+            - @?serializer
         tags:
             -
                 name: kernel.event_listener
