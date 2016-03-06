@@ -1,6 +1,8 @@
 Auto Json Response Bundle
 =========================
 
+v1.0.0
+
 A Symfony listener which converts controller returned data to a appropriate JsonResponse.
 
 [![SensioLabsInsight](https://insight.sensiolabs.com/projects/2a0c6077-2542-41f9-ac29-c84ef7239771/big.png)](https://insight.sensiolabs.com/projects/2a0c6077-2542-41f9-ac29-c84ef7239771)
