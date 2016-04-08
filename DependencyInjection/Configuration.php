@@ -22,7 +22,20 @@ class Configuration implements ConfigurationInterface
     public function getConfigTreeBuilder()
     {
         $treeBuilder = new TreeBuilder();
-        $treeBuilder->root('chrisyue_auto_json_response');
+        $rootNode = $treeBuilder->root('chrisyue_auto_json_response');
+
+        $rootNode
+            ->children()
+                ->arrayNode('serializer')
+                    ->canBeEnabled()
+                    ->children()
+                        ->arrayNode('default_groups')
+                            ->prototype('scalar')->end()
+                        ->end()
+                    ->end()
+                ->end()
+            ->end()
+        ;
 
         return $treeBuilder;
     }

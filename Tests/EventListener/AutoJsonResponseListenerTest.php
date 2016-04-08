@@ -132,14 +132,14 @@ class AutoJsonResponseListenerTest extends \PHPUnit_Framework_TestCase
 
     private function doTest(ObjectProphecy $event, ObjectProphecy $serializer = null)
     {
-        $listener = new AutoJsonResponseListener(null === $serializer ? null : $serializer->reveal());
+        $listener = new AutoJsonResponseListener(null === $serializer ? null : $serializer->reveal(), ['serialization_default_groups' => null]);
         $listener->onKernelView($event->reveal());
     }
 
     private function prophesizeSerializer(\stdClass $object, array $normalized)
     {
         $serializer = $this->prophesize(Serializer::class);
-        $serializer->normalize($object)->shouldBeCalledTimes(1)->willReturn($normalized);
+        $serializer->normalize($object, null, ['groups' => null])->shouldBeCalledTimes(1)->willReturn($normalized);
 
         return $serializer;
     }
