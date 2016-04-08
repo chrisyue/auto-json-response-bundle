@@ -50,9 +50,9 @@ class AutoJsonResponseListenerTest extends \PHPUnit_Framework_TestCase
         $this->doTest($event);
     }
 
-    public function testOnKernelViewWithNonObjectControllerResult()
+    public function testOnKernelViewWithScalarControllerResult()
     {
-        $nonObject = ['foo' => 'bar'];
+        $nonObject = 'foo';
         $event = $this->prophesizeEvent(true, true, $nonObject);
         $event->setResponse(new JsonResponse($nonObject))->shouldBeCalledTimes(1);
 
