@@ -3,7 +3,7 @@ Auto Json Response Bundle
 
 v1.0.0
 
-A Symfony listener which converts controller returned data to a appropriate JsonResponse.
+A Symfony listener which converts controller result to a appropriate JsonResponse.
 
 [![SensioLabsInsight](https://insight.sensiolabs.com/projects/2a0c6077-2542-41f9-ac29-c84ef7239771/big.png)](https://insight.sensiolabs.com/projects/2a0c6077-2542-41f9-ac29-c84ef7239771)
 
@@ -17,7 +17,7 @@ A Symfony listener which converts controller returned data to a appropriate Json
 Features
 --------
 
-* Convert `null` (or no `return`) to `JsonResponse(null, 204)`
+* Convert `null` to `JsonResponse(null, 204)`
 * Convert `$array|$object` to `JsonResponse($array|$normalizedObject)`
 * Convert `$array|$object` to `JsonResponse($array|$normalizedObject, 201)` if the method is `POST`
 
@@ -80,16 +80,11 @@ framework:
 with the power of the built-in serializer, we can do more configuration to meet our needs, like convert camalCase property to snake\_case:
 
 ```yaml
-# app/config/services.yml
-services:
-    app.serializer.snake_case_converter:
-        class: Symfony\Component\Serializer\NameConverter\CamelCaseToSnakeCaseNameConverter
-
 # app/config/config.yml
 framework:
     serializer:
         enable_annotations: true
-        name_converter: app.serializer.snake_case_converter
+        name_converter: serializer.name_converter.camel_case_to_snake_case
 ```
 
 More information about serialize, just check [symfony official documentation](https://symfony.com/doc/current/cookbook/serializer.html)

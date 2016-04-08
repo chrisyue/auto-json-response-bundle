@@ -53,7 +53,7 @@ class AutoJsonResponseListener
             $response->setStatusCode(201);
         }
 
-        if (is_object($result)) {
+        if (!is_scalar($result)) {
             $result = $this->getSerializer()->normalize($result);
         }
 
