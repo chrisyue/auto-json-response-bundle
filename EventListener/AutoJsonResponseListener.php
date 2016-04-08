@@ -19,10 +19,12 @@ use Symfony\Component\Serializer\Serializer;
 class AutoJsonResponseListener
 {
     private $serializer;
+    private $options;
 
-    public function __construct(Serializer $serializer = null)
+    public function __construct(Serializer $serializer = null, array $options = [])
     {
         $this->serializer = $serializer;
+        $this->options = $options;
     }
 
     public function onKernelView(GetResponseForControllerResultEvent $event)
@@ -54,7 +56,9 @@ class AutoJsonResponseListener
         }
 
         if (!is_scalar($result)) {
-            $result = $this->getSerializer()->normalize($result);
+            $result = $this->getSerializer()->normalize($result, null, [
+                'groups' => $this->options['serialization_default_groups'],
+            ]);
         }
 
         $response->setData($result);
