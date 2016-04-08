@@ -1,11 +1,14 @@
 parameters:
     chrisyue_auto_json_response.listener.auto_json_response.class: Chrisyue\Bundle\AutoJsonResponseBundle\EventListener\AutoJsonResponseListener
+    chrisyue_auto_json_response.serializer.default_groups: ~
 
 services:
     chrisyue_auto_json_response.listener.auto_json_response:
         class: %chrisyue_auto_json_response.listener.auto_json_response.class%
         arguments:
             - @?serializer
+            -
+                serialization_default_groups: %chrisyue_auto_json_response.serializer.default_groups%
         tags:
             -
                 name: kernel.event_listener

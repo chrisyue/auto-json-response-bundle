@@ -1,7 +1,7 @@
 Auto Json Response Bundle
 =========================
 
-v1.0.1
+v1.1.0
 
 A Symfony listener which converts controller result to a appropriate JsonResponse.
 
@@ -62,6 +62,8 @@ or in your controller file when you use annotation
 public function putAction(Response $response, $_format = 'json')
 {
     ...
+
+    return $object;
 }
 ```
 
@@ -88,3 +90,14 @@ framework:
 ```
 
 More information about serialize, just check [symfony official documentation](https://symfony.com/doc/current/cookbook/serializer.html)
+
+After v1.1.0, this bundle support specify default serialization groups:
+
+```yaml
+#app/config/config.yml
+chrisyue_auto_json_response:
+    serializer:
+        default_groups:
+            - 'group1'
+            - 'group2'
+```
