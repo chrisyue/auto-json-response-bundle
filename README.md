@@ -1,7 +1,7 @@
 Auto Json Response Bundle
 =========================
 
-v1.1.0
+v1.1.1
 
 A Symfony listener which converts controller result to a appropriate JsonResponse.
 
