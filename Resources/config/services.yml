@@ -6,7 +6,7 @@ services:
     chrisyue_auto_json_response.listener.auto_json_response:
         class: %chrisyue_auto_json_response.listener.auto_json_response.class%
         arguments:
-            - @?serializer
+            - '@?serializer'
             -
                 serialization_default_groups: %chrisyue_auto_json_response.serializer.default_groups%
         tags:
